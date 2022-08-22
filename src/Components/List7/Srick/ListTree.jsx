@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import ImplicitList from "./ImplicitList";
 
 const ListTree = ({
     tree = [],
@@ -11,12 +13,24 @@ const ListTree = ({
     if (typeof traversal !== "function") {
         throw new Error("[PH] ListTree requires traversal prop to be a function");
     }
-    const foo = tree.map(traversal);
+
+    const [ data, setData ] = useState([]);
+
+    useEffect(() => {
+        setData((curData = []) => {
+            const nextData = tree.map(traversal);
+            try {
+                if (JSON.stringify(curData) === JSON.stringify(nextData)) {
+                    return curData;
+                }
+            } catch (ex) {
+            }
+            return nextData;
+        });
+    }, [tree]);
 
     return (
-        <div>
-            <p>ListTree</p>
-        </div>
+        <ImplicitList data={data} />
     );
 };
 
