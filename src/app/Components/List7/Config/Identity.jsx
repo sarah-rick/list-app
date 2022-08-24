@@ -3,15 +3,13 @@ import React, {
     useEffect,
 } from "react";
 
-import ConfigItem from "../../ConfigItem";
-
-import { useConfig } from "../../InitConfig";
+import Config from "../../Config";
 
 const Identity = ({
     keys = [],
-    testFn = (keys = {}) => (
-        x => Object.keys(keys).every(key =>
-            x.hasOwnProperty(key) && x[key] === keys[key]
+    testFn = (data = {}) => (
+        x => Object.keys(data).every(key =>
+            x.hasOwnProperty(key) && x[key] === data[key]
         )
     ),
     children,
@@ -23,12 +21,12 @@ const Identity = ({
     };
 
     return (
-        <ConfigItem
+        <Config
             name="identity"
             config={config}
         >
             {children}
-        </ConfigItem>
+        </Config>
     );
 };
 

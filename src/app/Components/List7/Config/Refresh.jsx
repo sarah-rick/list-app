@@ -3,33 +3,57 @@ import React, {
     useEffect,
 } from "react";
 
-import ConfigItem from "../../ConfigItem";
+import Config from "../../Config";
 
-import { useConfig } from "../../InitConfig";
+const RefreshCanonEnum = {
+    props: "props",
+    state: "state",
+    default: "props",
+};
+
+const RefreshMergeEnum = {
+    default: "default",
+};
 
 const Refresh = ({
     enabled = true,
-    canon = "props",
+    canon = RefreshCanonEnum.default,
     prune = true,
-    merge = "default",
+    merge = RefreshMergeEnum.default,
     children,
     ...rest
 }) => {
+    if (!RefreshCanonEnum.hasOwnProperty(canon)) {
+        throw new Error("Erroneous canon property");
+    }
+
+    const mergeVal = merge === RefreshMergeEnum.default
+        ? (prune === true
+            ? (canon = {}) => ({...canon})
+            : (canon = {}, other = {}) => ({...other, ...canon})
+        )
+        : merge;
+
     const config = {
         enabled,
         canon,
         prune,
-        merge
+        merge: mergeVal
     };
 
     return (
-        <ConfigItem
+        <Config
             name="refresh"
             config={config}
         >
             {children}
-        </ConfigItem>
+        </Config>
     );
 };
 
 export default Refresh;
+
+export {
+    RefreshCanonEnum,
+    RefreshMergeEnum,
+}
