@@ -3,30 +3,31 @@ import React, {
     useEffect,
 } from "react";
 
-import { useConfig } from "./InitConfig";
+import { useConfig } from "../../InitConfig";
 
-import IdentityConfig from "./List7/Config/Identity";
-import RefreshConfig from "./List7/Config/Refresh";
+import IdentityConfig from "../Config/Identity";
+import RefreshConfig from "../Config/Refresh";
 
-const TestItem = ({
-    children,
+const Implicit = ({
+    data = [],
     ...rest
 }) => {
     const configCtx = useConfig();
     const { get = () => ({}) } = configCtx;
 
     console.log({
-        component: "TestItem",
+        component: "Implicit",
         identity: get("identity"),
         refresh: get("refresh"),
+        data,
     });
     return (
         <IdentityConfig>
             <RefreshConfig>
-                <p>Testin</p>
+                <p>ImplicitList</p>
             </RefreshConfig>
         </IdentityConfig>
     );
 };
 
-export default TestItem;
+export default Implicit;
