@@ -18,35 +18,35 @@ const useConfig = () => {
     return ctx;
 };
 
-
 const InitConfig = ({
     children,
     ...rest
 }) => {
     const [ configs, setConfigs ] = useState({});
 
-    const add = (
+    const update = (
         name = "",
-        config = {},
+        updateFn = (cur = {}) => ({}),
     ) => {
         setConfigs((configs = {}) => {
+            const oldConfig = configs[name];
+            const newConfig = updateFn(oldConfig);
+
             try {
-                if (
-                    configs.hasOwnProperty(name) &&
-                    JSON.stringify(configs[name]) === JSON.stringify(config)
-                ) {
+                if (JSON.stringify(oldConfig) === JSON.stringify(newConfig)) {
                     return configs;
                 }
             } catch (ex) {
             }
+
             return {
                 ...configs,
-                [name]: {...config},
+                [name]: {...newConfig},
             };
         });
     };
 
-    const del = (name = "") => {
+    const remove = (name = "") => {
         setConfigs((configs = {}) => {
             if (!configs.hasOwnProperty(name)) {
                 return configs;
@@ -59,11 +59,9 @@ const InitConfig = ({
     const get = (name = "") => configs[name] ?? {};
     
     const contextValue = {
-        name: "a",
-        config: "b",
-        add,
+        update,
         get,
-        del,
+        remove,
     };
 
     return (
@@ -76,5 +74,5 @@ const InitConfig = ({
 export default InitConfig;
 
 export {
-    useConfig
+    useConfig,
 };

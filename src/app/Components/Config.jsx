@@ -14,16 +14,22 @@ const Config = ({
     children,
     ...rest
 }) => {
+    const configProps = {
+        name,
+        config,
+    };
+
+    if (rest.hasOwnProperty("update")) {
+        configProps.update = rest.update;
+    }
+
     // If config context has already been set up,
     //     use that instance
     //
     try {
         useConfig();
         return (
-            <ConfigItem
-                name={name}
-                config={config}
-            >
+            <ConfigItem {...configProps}>
                 {children}
             </ConfigItem>
         );
@@ -32,10 +38,7 @@ const Config = ({
 
     return (
         <InitConfig>
-            <ConfigItem
-                name={name}
-                config={config}
-            >
+            <ConfigItem {...configProps}>
                 {children}
             </ConfigItem>
         </InitConfig>

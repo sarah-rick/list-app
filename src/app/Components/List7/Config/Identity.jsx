@@ -15,16 +15,20 @@ const Identity = ({
     children,
     ...rest
 }) => {
-    const config = {
-        keys,
-        testFn,
+    const configProps = {
+        name: "identity",
+        config: {
+            keys,
+            testFn,
+        }
     };
 
+    if (rest.hasOwnProperty("update")) {
+        configProps.update = rest.update;
+    }
+
     return (
-        <Config
-            name="identity"
-            config={config}
-        >
+        <Config {...configProps}>
             {children}
         </Config>
     );

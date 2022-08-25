@@ -8,18 +8,20 @@ import { useConfig } from "./InitConfig";
 const ConfigItem = ({
     name = "",
     config = {},
+    update = (orig = {}, next = {}) => next,
     children,
     ...rest
 }) => {
     const configCtx = useConfig();
 
     useEffect(() => {
-        const { add = () => null } = configCtx;
-        add(name, config);
+        configCtx.update(
+            name,
+            (orig = {}) => update(orig, config)
+        );
 
         return () => {
-            const { del = () => null } = configCtx;
-            del(name);
+            configCtx.remove(name);
         };
     }, [name]);
 

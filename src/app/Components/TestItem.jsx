@@ -5,6 +5,9 @@ import React, {
 
 import { useConfig } from "./InitConfig";
 
+import IdentityConfig from "./List7/Config/Identity";
+import RefreshConfig from "./List7/Config/Refresh";
+
 const TestItem = ({
     children,
     ...rest
@@ -18,7 +21,11 @@ const TestItem = ({
         refresh: get("refresh"),
     });
     return (
-        <p>Testin</p>
+        <IdentityConfig>
+            <RefreshConfig>
+                <p>Testin</p>
+            </RefreshConfig>
+        </IdentityConfig>
     );
 };
 

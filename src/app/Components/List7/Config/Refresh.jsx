@@ -34,18 +34,22 @@ const Refresh = ({
         )
         : merge;
 
-    const config = {
-        enabled,
-        canon,
-        prune,
-        merge: mergeVal
+    const configProps = {
+        name: "refresh",
+        config: {
+            enabled,
+            canon,
+            prune,
+            merge: mergeVal,
+        },
     };
 
+    if (rest.hasOwnProperty("update")) {
+        configProps.update = rest.update;
+    }
+
     return (
-        <Config
-            name="refresh"
-            config={config}
-        >
+        <Config {...configProps}>
             {children}
         </Config>
     );
