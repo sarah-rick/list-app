@@ -24,6 +24,45 @@ body, html {
         "sidebar content";
 }
 
+nav {
+    grid-area: sidebar;
+    display: flex;
+}
+
+.nav {
+    margin: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul,
+nav ol {
+    padding-left: 10px;
+}
+
+nav li {
+    padding: 3px 0px;
+    list-style: none;
+}
+
+nav li + li {
+    padding-top: 5px;
+}
+
+nav li span.currentPage {
+    font-weight: bold;
+}
+
+nav ul ul,
+nav ul ol,
+nav ol ul,
+nav ol ol {
+    background-color: #1B2431
+}
+
 .content {
     grid-area: content;
     display: flex;

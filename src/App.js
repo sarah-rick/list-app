@@ -1,6 +1,9 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import "./App.css";
+
+import Layout from "./app/Components/Layout";
 
 import IdentityConfig from "./app/Components/List7/Config/Identity";
 import RefreshConfig from "./app/Components/List7/Config/Refresh";
@@ -67,36 +70,34 @@ const App = (props) => {
     );
 
     return (
-        <div className="container">
-            <div className="content">
-                <div>
-                    <p>hello world!</p>
-                    <IdentityConfig
-                        keys={["apiId", "createId"]}
-                        testFn={({createId = ""}) => (
-                            x => x.createId === createId
-                        )}
+        <BrowserRouter>
+            <Layout>
+                <p>hello world!</p>
+                <IdentityConfig
+                    keys={["apiId", "createId"]}
+                    testFn={({createId = ""}) => (
+                        x => x.createId === createId
+                    )}
+                >
+                    <RefreshConfig
+                        enabled={true}
+                        canon={RefreshCanonEnum.state}
+                        prune={false}
+                        merge={RefreshMergeEnum.default}
                     >
-                        <RefreshConfig
-                            enabled={true}
-                            canon={RefreshCanonEnum.state}
-                            prune={false}
-                            merge={RefreshMergeEnum.default}
-                        >
-                            <TreeList
-                                tree={tree}
-                                traversal={traversal}
-                            />
-                            <RecordsList
-                                records={records}
-                                filter={filter}
-                                filterFn={filterFn}
-                            />
-                        </RefreshConfig>
-                    </IdentityConfig>
-                </div>
-            </div>
-        </div>
+                        <TreeList
+                            tree={tree}
+                            traversal={traversal}
+                        />
+                        <RecordsList
+                            records={records}
+                            filter={filter}
+                            filterFn={filterFn}
+                        />
+                    </RefreshConfig>
+                </IdentityConfig>
+            </Layout>
+        </BrowserRouter>
     );
 }
 
