@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Routes, useRoutes } from 'react-router-dom';
+import { Link, Route, Routes, useMatch } from 'react-router-dom';
 
 import SidebarItem from "./SidebarItem";
 
@@ -13,9 +13,34 @@ const SidebarList = ({
 
     return (
         <ul>
-            {list.map((item = {}) => (
-                <li key={item.path}>
-                    <SidebarItem {...item} />
+            {list.map(({
+                path = "",
+                name = "",
+                list = [],
+            }) => (
+                <li key={path}>
+                    <Routes>
+                        <Route
+                            path={`${path}/*`}
+                            element={(
+                                <SidebarItem
+                                    path={path}
+                                    name={name}
+                                    list={list}
+                                />
+                            )}
+                        />
+                        <Route
+                            path={`/*`}
+                            element={(
+                                <SidebarItem
+                                    path={path}
+                                    name={name}
+                                    list={[]}
+                                />
+                            )}
+                        />
+                    </Routes>
                 </li>
             ))}
         </ul>
