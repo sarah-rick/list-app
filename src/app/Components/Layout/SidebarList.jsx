@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, Route, Routes, useMatch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import SidebarItem from "./SidebarItem";
+import SidebarLink from "./SidebarLink";
 
 const SidebarList = ({
     list = [],
@@ -23,20 +23,21 @@ const SidebarList = ({
                         <Route
                             path={`${path}/*`}
                             element={(
-                                <SidebarItem
-                                    path={path}
-                                    name={name}
-                                    list={list}
-                                />
+                                <>
+                                    <SidebarLink
+                                        path={path}
+                                        name={name}
+                                    />
+                                    <SidebarList list={list} />
+                                </>
                             )}
                         />
                         <Route
                             path={`/*`}
                             element={(
-                                <SidebarItem
+                                <SidebarLink
                                     path={path}
                                     name={name}
-                                    list={[]}
                                 />
                             )}
                         />
