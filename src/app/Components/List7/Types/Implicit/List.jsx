@@ -9,34 +9,6 @@ import ListContainer from "../../Containers/List";
 import ItemContainer from "../../Containers/Item";
 import NodeContainer from "../../Containers/Node";
 
-/*
-
-const applier = ({
-    props = {},
-    children
-}) => {
-    const components = [];
-    React.Children.forEach(children, (element, eIdx) => {
-        if (!React.isValidElement(element)) {
-            components.push(element);
-            return;
-        }
-
-        const eKey = element.key ?? eIdx;
-    
-        components.push(
-            <element.type 
-                key={eKey}
-                {...element.props}
-                {...props}
-            />
-        );
-    });
-
-    return components;
-};
-
-*/
 const List = ({
     data = [],
     ...rest
@@ -60,20 +32,6 @@ const List = ({
     ) {
         return null;
     }
-
-    /*
-            <element.type 
-                key={eKey}
-                {...element.props}
-                {...props}
-            />
-    */
-
-    const component = (
-        <display.component.type
-            {...display.component.props}
-        />
-    );
 
     // Inner div used for things like onClick events etc
     return (
