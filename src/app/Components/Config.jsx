@@ -3,10 +3,10 @@ import React, {
     useEffect,
 } from "react";
 
-import InitConfig from "./InitConfig";
-import ConfigItem from "./ConfigItem";
+import InitConfig from "./Config/InitConfig";
+import ConfigItem from "./Config/ConfigItem";
 
-import { useConfig } from "./InitConfig";
+import { useConfig } from "./Config/InitConfig";
 
 const Config = ({
     name = "",

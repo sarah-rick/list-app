@@ -3,7 +3,7 @@ import React, {
     useEffect,
 } from "react";
 
-import { useConfig } from "../../InitConfig";
+import { useConfig } from "../../Config/InitConfig";
 
 import IdentityConfig from "../Config/Identity";
 import RefreshConfig from "../Config/Refresh";
