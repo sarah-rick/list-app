@@ -2,6 +2,7 @@ import React from "react";
 
 import IdentityConfig from "../../List7/Config/Identity";
 import RefreshConfig from "../../List7/Config/Refresh";
+import DisplayConfig from "../../List7/Config/Display";
 
 import {
     RefreshCanonEnum,
@@ -41,24 +42,32 @@ const Tree = (props) => {
     });
 
     return (
-        <IdentityConfig
-            keys={["apiId", "createId"]}
-            testFn={({createId = ""}) => (
-                x => x.createId === createId
+        <DisplayConfig
+            component={(
+                <div>
+                    Hello!
+                </div>
             )}
         >
-            <RefreshConfig
-                enabled={true}
-                canon={RefreshCanonEnum.state}
-                prune={false}
-                merge={RefreshMergeEnum.default}
+            <IdentityConfig
+                keys={["apiId", "createId"]}
+                testFn={({createId = ""}) => (
+                    x => x.createId === createId
+                )}
             >
-                <TreeList
-                    tree={tree}
-                    traversal={traversal}
-                />
-            </RefreshConfig>
-        </IdentityConfig>
+                <RefreshConfig
+                    enabled={true}
+                    canon={RefreshCanonEnum.state}
+                    prune={false}
+                    merge={RefreshMergeEnum.default}
+                >
+                    <TreeList
+                        tree={tree}
+                        traversal={traversal}
+                    />
+                </RefreshConfig>
+            </IdentityConfig>
+        </DisplayConfig>
     );
 }
 
