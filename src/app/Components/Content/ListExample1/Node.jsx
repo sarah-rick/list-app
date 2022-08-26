@@ -7,7 +7,6 @@ const Node = ({
     value = "",
     ...rest
 }) => {
-    console.log({rest});
     return (
         <div>
             {value}

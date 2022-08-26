@@ -56,7 +56,7 @@ const InitConfig = ({
         });
     };
 
-    const get = (name = "") => configs[name] ?? {};
+    const get = (name = "") => configs[name];
     
     const contextValue = {
         update,

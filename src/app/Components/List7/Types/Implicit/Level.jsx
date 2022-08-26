@@ -18,6 +18,7 @@ const Level = ({
 
     const display = configCtx.get("display");
 
+    /*
     console.log({
         component: "Level",
         identity: get("identity"),
@@ -25,6 +26,7 @@ const Level = ({
         display: get("display"),
         items,
     });
+    */
 
     if (
         items.length === 0 ||
@@ -37,10 +39,11 @@ const Level = ({
     return (
         <ListContainer>
             {items.map(({
+                keys = {},
                 data = {},
                 list = {}
-            }, idx) => (
-                <ItemContainer key={idx}>
+            }) => (
+                <ItemContainer key={JSON.stringify(keys)}>
                     <NodeContainer>
                         <display.component.type
                             {...display.component.props}
