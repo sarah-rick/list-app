@@ -33,6 +33,7 @@ nav {
     margin: 10px;
 }
 
+.content a,
 nav a {
     color: white;
     text-decoration: none;

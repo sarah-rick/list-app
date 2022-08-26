@@ -10,16 +10,25 @@ import ListExample1 from "./app/Components/Content/ListExample1";
 const App = (props) => {
     const list = [
         {
-            path: "/hello",
-            name: "Hello World!",
-            /*
+            path: "/",
+            name: "Home!",
+            component: (<></>),
+        },
+        {
+            path: "/ex1",
+            name: "Example 1",
             list: [
                 {
-                    path: "/hello/world",
-                    name: "Subitem!",
-                }
+                    path: "/ex1/tree",
+                    name: "Tree Data",
+                    component: (<ListExample1 type="tree" />),
+                },
+                {
+                    path: "/ex1/records",
+                    name: "Recordset data",
+                    component: (<ListExample1 type="records" />),
+                },
             ],
-            */
             component: (<ListExample1 />),
         },
     ];
