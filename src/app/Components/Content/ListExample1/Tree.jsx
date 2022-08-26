@@ -11,6 +11,8 @@ import {
 
 import TreeList from "../../List7/Types/Tree";
 
+import Node from "./Node";
+
 const Tree = (props) => {
     const tree = [
         {value: "A", apiId: 7056, createId: "00", parentId: null, disabled: true, children: [
@@ -43,11 +45,7 @@ const Tree = (props) => {
 
     return (
         <DisplayConfig
-            component={(
-                <div>
-                    Hello!
-                </div>
-            )}
+            component={(<Node />)}
         >
             <IdentityConfig
                 keys={["apiId", "createId"]}

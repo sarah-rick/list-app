@@ -9,6 +9,34 @@ import ListContainer from "../../Containers/List";
 import ItemContainer from "../../Containers/Item";
 import NodeContainer from "../../Containers/Node";
 
+/*
+
+const applier = ({
+    props = {},
+    children
+}) => {
+    const components = [];
+    React.Children.forEach(children, (element, eIdx) => {
+        if (!React.isValidElement(element)) {
+            components.push(element);
+            return;
+        }
+
+        const eKey = element.key ?? eIdx;
+    
+        components.push(
+            <element.type 
+                key={eKey}
+                {...element.props}
+                {...props}
+            />
+        );
+    });
+
+    return components;
+};
+
+*/
 const List = ({
     data = [],
     ...rest
@@ -16,23 +44,54 @@ const List = ({
     const configCtx = useConfig();
     const { get = () => ({}) } = configCtx;
 
+    const display = configCtx.get("display");
+
     console.log({
         component: "List",
         identity: get("identity"),
         refresh: get("refresh"),
+        display: get("display"),
         data,
     });
+
+    if (
+        data.length === 0 ||
+        !React.isValidElement(display.component)
+    ) {
+        return null;
+    }
+
+    /*
+            <element.type 
+                key={eKey}
+                {...element.props}
+                {...props}
+            />
+    */
+
+    const component = (
+        <display.component.type
+            {...display.component.props}
+        />
+    );
 
     // Inner div used for things like onClick events etc
     return (
         <ListContainer>
-            <ItemContainer>
-                <NodeContainer>
-                    <div>
-                        Hello!
-                    </div>
-                </NodeContainer>
-            </ItemContainer>
+            {data.map(({
+                data = {},
+                list = {}
+            }, idx) => (
+                <ItemContainer key={idx}>
+                    <NodeContainer>
+                        <display.component.type
+                            {...display.component.props}
+                            {...data}
+                        />
+                    </NodeContainer>
+                    <List data={list} />
+                </ItemContainer>
+            ))}
         </ListContainer>
     );
 };

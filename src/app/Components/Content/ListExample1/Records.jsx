@@ -2,6 +2,7 @@ import React from "react";
 
 import IdentityConfig from "../../List7/Config/Identity";
 import RefreshConfig from "../../List7/Config/Refresh";
+import DisplayConfig from "../../List7/Config/Display";
 
 import {
     RefreshCanonEnum,
@@ -9,6 +10,8 @@ import {
 } from "../../List7/Config/Refresh";
 
 import RecordsList from "../../List7/Types/Records";
+
+import Node from "./Node";
 
 const Records = (props) => {
     const records = [
@@ -34,25 +37,29 @@ const Records = (props) => {
     );
 
     return (
-        <IdentityConfig
-            keys={["apiId", "createId"]}
-            testFn={({createId = ""}) => (
-                x => x.createId === createId
-            )}
+        <DisplayConfig
+            component={(<Node />)}
         >
-            <RefreshConfig
-                enabled={true}
-                canon={RefreshCanonEnum.state}
-                prune={false}
-                merge={RefreshMergeEnum.default}
+            <IdentityConfig
+                keys={["apiId", "createId"]}
+                testFn={({createId = ""}) => (
+                    x => x.createId === createId
+                )}
             >
-                <RecordsList
-                    records={records}
-                    filter={filter}
-                    filterFn={filterFn}
-                />
-            </RefreshConfig>
-        </IdentityConfig>
+                <RefreshConfig
+                    enabled={true}
+                    canon={RefreshCanonEnum.state}
+                    prune={false}
+                    merge={RefreshMergeEnum.default}
+                >
+                    <RecordsList
+                        records={records}
+                        filter={filter}
+                        filterFn={filterFn}
+                    />
+                </RefreshConfig>
+            </IdentityConfig>
+        </DisplayConfig>
     );
 }
 

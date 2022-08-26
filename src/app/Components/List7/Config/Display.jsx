@@ -11,8 +11,10 @@ const Display = ({
     ...rest
 }) => {
     const configProps = {
-        name: "identity",
-        component,
+        name: "display",
+        config: {
+            component,
+        },
     };
 
     return (
