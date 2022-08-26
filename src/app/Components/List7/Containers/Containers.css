@@ -1,0 +1,162 @@
+/* THE TREE */
+
+/* this aligns all nodes in a set horizontally */
+.tree {
+    display: flex;
+    flex-direction: row; /* default val */
+    padding: 0;
+    margin: 0;
+}
+
+/* this aligns a node and all child nodes vertically */
+.tree > li {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+
+/* THE NODES */
+
+.tree > li > .node {
+    /* this forces all nodes to be as wide as they have to be
+       without this they will stretch to the full width of the parent
+    */
+    align-self: center;
+
+    display: inline-block;
+    position: relative;
+    margin: 20px 5px;
+    border-radius: 10px;
+}
+
+
+
+/* THE LINE */
+
+.tree > li::before,         /* horizontal line above nodes */
+.tree > li > .node::before, /* vertical line above a node */
+.tree > li > .node::after   /* vertical line below a node */
+{
+    /* necessary for styling to appear */
+    content: '';
+    /* takes border content outside of flow of document */
+    position: absolute;
+    /* calculate width INCLUDING margin & border, not just padding */
+    box-sizing: border-box;
+
+    border: 0px solid #CCCCCC;
+}
+
+
+
+/* Horizontal line */
+
+.tree > li:not(:only-child)::before {
+    border-top-width: 2px;
+    width: 100%;
+    height: 20px;
+    top: 0px;
+}
+
+/* Curves down leftmost part of line */
+.tree > li:first-child:not(:only-child)::before {
+    width: calc(50% + 1px);
+    right: 0;
+    border-left-width: 2px;
+    border-top-left-radius: 7px;
+}
+
+/* Curves down rightmost part of line */
+.tree > li:last-child:not(:only-child)::before {
+    width: calc(50% + 1px);
+    left: 0;
+    border-right-width: 2px;
+    border-top-right-radius: 7px;
+}
+
+
+
+/* Vertical lines */
+
+/* for trees that don't start with one single node */
+.tree > li:not(:only-child) > .node::before,
+.tree > li > .tree > li > .node::before,
+.tree > li > .node:not(:only-child)::after
+{
+    border-left-width: 2px;
+    width: 2px;
+    height: 20px;
+    left: calc(50% - 1px);
+}
+
+/* Parent line is above node */
+.tree > li > .node::before {
+    top: -20px;
+}
+
+/* Child line is below node */
+.tree > li > .node:not(:only-child)::after {
+    bottom: -20px;
+}
+
+
+
+/* Override: 
+   The first and last nodes in a set of 2 or more
+*/
+.tree > li:first-child:not(:only-child) > .node::before,
+.tree > li:last-child:not(:only-child) > .node::before {
+    border-left-width: 0px;
+}
+
+/* Skin for nodes */
+
+/* Default styling of color nodes */
+
+li > .node > * {
+    border: 2px solid #232d3d;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #3f516e;
+    color: white;
+    cursor: pointer;
+}
+
+li:hover > .node > * {
+    border-color: #3c4d69;
+    background-color: #587199;
+}
+
+li > .node .icon {
+    display: block;
+    color: #51698e;
+}
+
+li:hover > .node .icon {
+    color: #758bb0;
+}
+
+li > .node.disabled > *,
+li:hover > .node.disabled > *,
+.disabled > li > .node > *,
+.disabled > li:hover > .node > * {
+    box-shadow: none;
+    border-color: #5f5f5f;
+    background-color: #858585;
+    color: #c2c2c2;
+    cursor: default;
+}
+
+
+
+/* Direct hover; checked (multi) */
+
+li > .node.toggleOn > * {
+    border-color: white !important;
+}
+
+li > .node:hover > * {
+    box-shadow: 0px 0px 12px 0 rgba(117, 139, 176, 0.75), 0px 0px 6px 0 rgba(255, 255, 255, 0.5) inset;
+}
