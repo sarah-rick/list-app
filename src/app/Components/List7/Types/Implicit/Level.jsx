@@ -35,7 +35,6 @@ const Level = ({
         return null;
     }
 
-    // Inner div used for things like onClick events etc
     return (
         <ListContainer>
             {items.map(({
