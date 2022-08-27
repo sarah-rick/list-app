@@ -3,22 +3,21 @@ import React, {
     useEffect,
 } from "react";
 
-const Identify = ({
-    data = [],
+const ChangeIdentity = ({
+    fullData = [],
     keys = [],
     testFn = () => (x => false),
     update = () => null,
     ...rest
 }) => {
-    const [ fullData, setFullData ] = useState([]);
+    const [ processed, setProcessed ] = useState([]);
 
     useEffect(() => {
-        console.log("updated");
-        update(fullData);
-    }, [fullData]);
+        update(processed);
+    }, [processed]);
 
     useEffect(() => {
-        setFullData((curFullData = {}) => {
+        setProcessed((curProcessed = {}) => {
             // First, we must assign keys to the data
             //
             const filter = (data = {}) => {
@@ -51,25 +50,25 @@ const Identify = ({
                 list: list.map(testDataFn),
             });
 
-            const nextFullData = data
+            const nextProcessed = fullData
                 .map(keyDataFn)
                 .map(testDataFn);
 
             try {
                 if (
-                    JSON.stringify(curFullData) ===
-                    JSON.stringify(nextFullData)
+                    JSON.stringify(curProcessed) ===
+                    JSON.stringify(nextProcessed)
                 ) {
-                    return curFullData;
+                    return curProcessed;
                 }
             } catch (ex) {
             }
 
-            return nextFullData;
+            return nextProcessed;
         });
-    }, [data, keys, testFn]);
+    }, [keys, testFn]);
 
     return null;
 };
 
-export default Identify;
+export default ChangeIdentity;

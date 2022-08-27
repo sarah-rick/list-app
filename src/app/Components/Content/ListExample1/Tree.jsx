@@ -13,7 +13,10 @@ import TreeList from "../../List7/Types/Tree";
 
 import Node from "./Node";
 
-const Tree = (props) => {
+const Tree = ({
+    identity = true,
+    ...rest
+}) => {
     const tree = [
         {value: "A", apiId: 7056, createId: "00", parentId: null, disabled: true, children: [
             {value: "A1", apiId: 9026, createId: "01", parentId: 7056, disabled: true, favorite: true, children: [
@@ -43,15 +46,21 @@ const Tree = (props) => {
         list: children.map(traversal),
     });
 
+    const identityConfigProps = identity !== true
+        ? {}
+        : {
+            keys: ["apiId", "createId"],
+            testFn: ({createId = ""}) => (
+                x => x.createId === createId
+            ),
+        };
+
     return (
         <DisplayConfig
             component={(<Node />)}
         >
             <IdentityConfig
-                keys={["apiId", "createId"]}
-                testFn={({createId = ""}) => (
-                    x => x.createId === createId
-                )}
+                {...identityConfigProps}
             >
                 <RefreshConfig
                     enabled={true}

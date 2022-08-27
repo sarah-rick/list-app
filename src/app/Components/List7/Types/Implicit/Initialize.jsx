@@ -4,6 +4,7 @@ import React, {
 } from "react";
 
 import ProcessProps from "./ProcessProps";
+import ProcessIdentity from "./ProcessIdentity";
 
 import { ConfigsNameEnum } from "../../DefaultConfigs";
 
@@ -11,7 +12,11 @@ import { useConfig } from "../../../Config/InitConfig";
 
 const Initialize = ({
     data = [],
+    fullData = [], // currently stored data
+                   // eventually this will be current items
     update = () => null,
+    updateFullData = () => null, // identical to update
+                                 // but may not always be
     ...rest
 }) => {
     const [ processed, setProcessed ] = useState([]);
@@ -40,10 +45,16 @@ const Initialize = ({
 
     const initialized = configCtx.get(ConfigsNameEnum.initialized);
     return initialized !== undefined && (
-        <ProcessProps
-            data={data}
-            update={updateProcessed}
-        />
+        <>
+            <ProcessIdentity
+                fullData={fullData}
+                update={updateFullData}
+            />
+            <ProcessProps
+                data={data}
+                update={updateProcessed}
+            />
+        </>
     );
 };
 

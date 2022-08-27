@@ -26,6 +26,10 @@ const ConfigItem = ({
     }, [name]);
 
     useEffect(() => {
+        console.log({
+            name,
+            config,
+        });
         configCtx.update(
             name,
             (orig = {}) => update(orig, config)

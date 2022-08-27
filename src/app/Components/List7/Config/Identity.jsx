@@ -25,6 +25,8 @@ const Identity = ({
         }
     };
 
+    console.log({configProps});
+
     if (rest.hasOwnProperty("update")) {
         configProps.update = rest.update;
     }
