@@ -25,6 +25,13 @@ const ConfigItem = ({
         };
     }, [name]);
 
+    useEffect(() => {
+        configCtx.update(
+            name,
+            (orig = {}) => update(orig, config)
+        );
+    }, [config]);
+
     return children;
 };
 

@@ -20,18 +20,32 @@ const DefaultConfigs = ({
     children,
     ...rest
 }) => {
+    const update = (cur = {}, next = {}) => {
+        if (!cur || Object.keys(cur).length === 0) {
+            return next;
+        }
+        return cur;
+    };
+
     const initProps = {
         name: ConfigsNameEnum.initialized,
         config: {
             initialized: true,
         },
+        update,
     };
 
     return (
         <Config {...initProps}>
-            <DisplayConfig>
-                <IdentityConfig>
-                    <RefreshConfig>
+            <DisplayConfig
+                update={update}
+            >
+                <IdentityConfig
+                    update={update}
+                >
+                    <RefreshConfig
+                        update={update}
+                    >
                         {children}
                     </RefreshConfig>
                 </IdentityConfig>
