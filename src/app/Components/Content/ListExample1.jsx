@@ -1,6 +1,9 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+import React, {
+    useState,
+    useEffect,
+} from "react";
 
+import ConfigControls from "./ListExample1/ConfigControls";
 import Records from "./ListExample1/Records";
 import Tree from "./ListExample1/Tree";
 import Links from "./ListExample1/Links";
@@ -17,13 +20,26 @@ const ListExample1 = ({
     type = ListExample1Enum.default,
     ...rest
 }) => {
+    const [ identity, setIdentity ] = useState(true);
+    const updateIdentity = (val = true) => setIdentity(val);
+
     return (
         <div>
+            {type !== ListExample1Enum.none && (
+                <ConfigControls
+                    identity={identity}
+                    updateIdentity={updateIdentity}
+                />
+            )}
             {type === ListExample1Enum.tree && (
-                <Tree />
+                <Tree
+                    identity={identity}
+                />
             )}
             {type === ListExample1Enum.records && (
-                <Records />
+                <Records
+                    identity={identity}
+                />
             )}
             {type === ListExample1Enum.none && (
                 <Links />

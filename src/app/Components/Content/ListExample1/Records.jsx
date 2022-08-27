@@ -13,7 +13,10 @@ import RecordsList from "../../List7/Types/Records";
 
 import Node from "./Node";
 
-const Records = (props) => {
+const Records = ({
+    identity = true,
+    ...rest
+}) => {
     const records = [
         {apiId: 7056, createId: "00", parentId: null, value: "A", disabled: true},
         {apiId: 9026, createId: "01", parentId: 7056, value: "A1", disabled: true, favorite: true},
@@ -36,15 +39,21 @@ const Records = (props) => {
         x => x.parentId === apiId
     );
 
+    const identityConfigProps = identity !== true
+        ? {}
+        : {
+            keys: ["apiId", "createId"],
+            testFn: ({createId = ""}) => (
+                x => x.createId === createId
+            ),
+        };
+
     return (
         <DisplayConfig
             component={(<Node />)}
         >
             <IdentityConfig
-                keys={["apiId", "createId"]}
-                testFn={({createId = ""}) => (
-                    x => x.createId === createId
-                )}
+                {...identityConfigProps}
             >
                 <RefreshConfig
                     enabled={true}
