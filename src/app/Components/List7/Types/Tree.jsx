@@ -14,9 +14,7 @@ const Tree = ({
     const data = tree.map(traversal);
 
     return (
-        <DefaultConfigs>
-            <ImplicitList data={data} />
-        </DefaultConfigs>
+        <ImplicitList data={data} />
     );
 };
 

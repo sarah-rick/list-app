@@ -4,15 +4,40 @@ import React, {
 } from "react";
 
 import DefaultConfigs from "../../DefaultConfigs";
-import DataStorage from "./DataStorage";
+import Initialize from "./Initialize";
+import Level from "./Level";
 
 const List = ({
     data = [],
     ...rest
 }) => {
+    const [ items, setItems ] = useState([]);
+
+    useEffect(() => {
+        console.log({
+            component: "List",
+            items,
+        });
+    }, [items]);
+
+    const updateItems = (nextItems = []) => {
+        setItems((curItems = []) => {
+            try {
+                if (JSON.stringify(curItems) === JSON.stringify(nextItems)) {
+                    return curItems;
+                }
+            } catch (ex) {
+            }
+            return nextItems;
+        });
+    };
     return (
         <DefaultConfigs>
-            <DataStorage data={data} />
+            <Initialize
+                data={data}
+                update={updateItems}
+            />
+            <Level items={items} />
         </DefaultConfigs>
     );
 };

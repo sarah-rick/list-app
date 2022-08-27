@@ -5,6 +5,8 @@ import React, {
 
 import Config from "../../Config";
 
+import { ConfigsNameEnum } from "../DefaultConfigs";
+
 const Identity = ({
     keys = [],
     testFn = (data = {}) => (
@@ -16,7 +18,7 @@ const Identity = ({
     ...rest
 }) => {
     const configProps = {
-        name: "identity",
+        name: ConfigsNameEnum.identity,
         config: {
             keys,
             testFn,

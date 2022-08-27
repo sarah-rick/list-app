@@ -5,6 +5,8 @@ import React, {
 
 import Config from "../../Config";
 
+import { ConfigsNameEnum } from "../DefaultConfigs";
+
 const RefreshCanonEnum = {
     props: "props",
     state: "state",
@@ -35,7 +37,7 @@ const Refresh = ({
         : merge;
 
     const configProps = {
-        name: "refresh",
+        name: ConfigsNameEnum.refresh,
         config: {
             enabled,
             canon,

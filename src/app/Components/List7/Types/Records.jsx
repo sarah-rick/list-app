@@ -28,9 +28,7 @@ const Records = ({
         .map(conversion);
 
     return (
-        <DefaultConfigs>
-            <ImplicitList data={data} />
-        </DefaultConfigs>
+        <ImplicitList data={data} />
     );
 };
 
