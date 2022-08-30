@@ -3,8 +3,8 @@ import React, {
     useEffect,
 } from "react";
 
-import ProcessProps from "./ProcessProps";
-import ProcessIdentity from "./ProcessIdentity";
+import ProcessIdentity from "./Process/Identity";
+import ProcessProps from "./Process/Props";
 
 import { ConfigsNameEnum } from "../../DefaultConfigs";
 

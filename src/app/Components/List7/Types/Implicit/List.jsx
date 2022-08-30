@@ -18,11 +18,6 @@ const List = ({
     const [ fullData, setFullData ] = useState([]);
 
     useEffect(() => {
-        console.log({
-            component: "List",
-            fullData,
-        });
-
         const nextItems = [...fullData];
         setItems((curItems = []) => {
             try {

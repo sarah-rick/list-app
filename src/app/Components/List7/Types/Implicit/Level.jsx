@@ -41,7 +41,7 @@ const Level = ({
                 keys = {},
                 data = {},
                 list = {}
-            }) => !console.log({keys, data}) && (
+            }) => (
                 <ItemContainer key={JSON.stringify(keys)}>
                     <NodeContainer>
                         <display.component.type

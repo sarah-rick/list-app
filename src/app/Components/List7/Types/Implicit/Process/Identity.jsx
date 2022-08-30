@@ -3,12 +3,12 @@ import React, {
     useEffect,
 } from "react";
 
-import FullData from "./FullData";
-import ChangeIdentity from "./ChangeIdentity";
+import FullData from "../FullData";
+import ChangeIdentity from "../ChangeIdentity";
 
-import { useConfig } from "../../../Config/InitConfig";
+import { useConfig } from "../../../../Config/InitConfig";
 
-const ProcessIdentity = ({
+const Identity = ({
     fullData = [],
     update = () => null,
     ...rest
@@ -25,4 +25,4 @@ const ProcessIdentity = ({
     );
 };
 
-export default ProcessIdentity;
+export default Identity;

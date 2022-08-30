@@ -3,11 +3,11 @@ import React, {
     useEffect,
 } from "react";
 
-import FullData from "./FullData";
+import FullData from "../FullData";
 
-import { useConfig } from "../../../Config/InitConfig";
+import { useConfig } from "../../../../Config/InitConfig";
 
-const ProcessProps = ({
+const Props = ({
     data = [],
     update = () => null,
     ...rest
@@ -24,4 +24,4 @@ const ProcessProps = ({
     );
 };
 
-export default ProcessProps;
+export default Props;
