@@ -19,27 +19,24 @@ const Initialize = ({
                                  // but may not always be
     ...rest
 }) => {
-    const [ processed, setProcessed ] = useState([]);
+    const [ newFullData, setNewFullData ] = useState([]);
 
     const configCtx = useConfig();
 
     useEffect(() => {
-        update(processed);
-    }, [processed]);
+        update(newFullData);
+    }, [newFullData]);
 
-    const updateProcessed = (nextProcessed = []) => {
-        setProcessed((curProcessed = []) => {
+    const updateNewFullData = (next = []) => {
+        setNewFullData((cur = []) => {
             try {
-                if (
-                    JSON.stringify(curProcessed) ===
-                    JSON.stringify(nextProcessed)
-                ) {
-                    return curProcessed;
+                if (JSON.stringify(cur) === JSON.stringify(next)) {
+                    return cur;
                 }
             } catch (ex) {
             }
 
-            return nextProcessed;
+            return next;
         });
     };
 
@@ -52,7 +49,7 @@ const Initialize = ({
             />
             <ProcessProps
                 data={data}
-                update={updateProcessed}
+                update={updateNewFullData}
             />
         </>
     );
