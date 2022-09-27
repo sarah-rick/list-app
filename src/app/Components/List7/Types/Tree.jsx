@@ -3,8 +3,8 @@ import React, {
     useEffect,
 } from "react";
 
-import DefaultConfigs from "../DefaultConfigs";
 import ImplicitList from "./Implicit/List";
+import ImplicitList2 from "./Implicit3/List";
 
 const Tree = ({
     tree = [],
@@ -14,7 +14,7 @@ const Tree = ({
     const data = tree.map(traversal);
 
     return (
-        <ImplicitList data={data} />
+        <ImplicitList2 data={data} />
     );
 };
 
